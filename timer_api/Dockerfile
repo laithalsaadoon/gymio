@@ -3,7 +3,6 @@ WORKDIR /timer_lights_button
 COPY . .
 ENV PYTHONPATH=${PYTHONPATH}:${PWD}
 
-RUN sudo apk remove rustc
 RUN sudo curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 RUN pip3 install --upgrade pip
 RUN pip3 install poetry
