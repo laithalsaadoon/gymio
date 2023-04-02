@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, make_response
 import json
-from my_types import HIIT
-from trainer import Trainer
+from timer_api.types.my_types import HIIT
+from timer_api.trainer.trainer import Trainer
 
 from apscheduler.schedulers.background import BackgroundScheduler
 

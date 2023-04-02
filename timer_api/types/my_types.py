@@ -27,5 +27,6 @@ class HIIT:
 @dataclass
 class Timer_Dict:
     seconds: int
-    color: str
+    color_on: function
+    color_off: function
     current_round: int
