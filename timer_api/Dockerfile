@@ -3,8 +3,10 @@ WORKDIR /timer_lights_button
 COPY . .
 ENV PYTHONPATH=${PYTHONPATH}:${PWD}
 
-RUN sudo curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 RUN pip3 install --upgrade pip
 RUN pip3 install poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install --no-dev
+
+CMD ["python3", "timer_api.py"]
