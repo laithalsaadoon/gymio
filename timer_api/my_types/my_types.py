@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-
+from collections.abc import Callable
 
 @dataclass
 class HIIT:
@@ -27,6 +27,6 @@ class HIIT:
 @dataclass
 class Timer_Dict:
     seconds: int
-    color_on: function
-    color_off: function
+    color_on: Callable[None, None]
+    color_off: Callable[None, None]
     current_round: int

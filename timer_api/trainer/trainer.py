@@ -2,8 +2,8 @@ from collections import deque
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
-from timer_api.lights.lights import Lights
-from timer_api.types.my_types import HIIT, Timer_Dict
+from lights.lights import Lights
+from my_types.my_types import HIIT, Timer_Dict
 
 
 class Trainer:
@@ -60,11 +60,13 @@ class Trainer:
 
         except IndexError:
             print("You're done!")
+            self.all_off()
             self.job.remove()
             self.scheduled = False
             self.job = None
 
     def stop(self):
+        self.all_off()
         self.scheduler.shutdown()
         print("Goodbye!")
 
