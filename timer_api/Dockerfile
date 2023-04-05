@@ -32,4 +32,5 @@ RUN pip3 install poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install --only main --no-root
 
-CMD ["python3, "main.py"]
+ENTRYPOINT ["python3"]
+CMD ["main.py"]
