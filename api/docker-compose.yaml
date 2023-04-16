@@ -1,7 +1,7 @@
 version: '3.6'
 services:
   postgres:
-    image: postgres:12
+    image: postgres:14
     restart: always
     volumes:
     - db_data:/var/lib/postgresql/data
@@ -19,7 +19,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: pgadmin@example.com
       PGADMIN_DEFAULT_PASSWORD: admin
   graphql-engine:
-    image: hasura/graphql-engine:v2.8.3.cli-migrations-v2
+    image: hasura/graphql-engine:latest
     ports:
     - "8080:8080"
     depends_on:

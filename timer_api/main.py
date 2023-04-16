@@ -2,10 +2,12 @@ from flask import Flask, request, jsonify, make_response
 import json
 from my_types.my_types import HIIT
 from trainer.trainer import Trainer
+from fastapi import FastAPI
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
-app = Flask(__name__)
+# app = Flask(__name__)
+app = FastAPI()
 scheduler = BackgroundScheduler()
 trainer = Trainer(scheduler)
 
