@@ -2,12 +2,14 @@ from flask import Flask, request, jsonify, make_response
 import json
 from my_types.my_types import HIIT
 from trainer.trainer import Trainer
+from flask_cors import CORS
 # from fastapi import FastAPI
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
 app = Flask(__name__)
 # app = FastAPI()
+CORS(app)
 scheduler = BackgroundScheduler()
 trainer = Trainer(scheduler)
 
