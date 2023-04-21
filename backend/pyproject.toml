@@ -1,13 +1,13 @@
 [tool.poetry]
-name = "timer-api"
+name = "backend"
 version = "0.1.0"
 description = ""
 authors = ["Laith Al-Saadoon <alsaadoonlaith@gmail.com>"]
 readme = "README.md"
-packages = [{include = "timer_api"}]
+packages = [{include = "backend"}]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 Flask = "^2.2.3"
 APScheduler = "^3.10.1"
 gpiozero = "^1.6.2"

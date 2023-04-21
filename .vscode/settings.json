@@ -7,5 +7,6 @@
 		"--max-line-length=120",
 		"--ignore=E203,E211,E999,F401,F821,W503"
 	],
-	"python.linting.flake8Path": "/home/lalsaado/.local/bin/flake8"
+	"python.linting.flake8Path": "/home/lalsaado/.local/bin/flake8",
+	"flake8.importStrategy": "fromEnvironment"
 }
