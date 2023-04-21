@@ -27,6 +27,6 @@ class HIIT:
 @dataclass
 class Timer_Dict:
     seconds: int
-    color_on: Callable[None, None]
-    color_off: Callable[None, None]
+    color_on: Callable[[None], None]
+    color_off: Callable[[None], None]
     current_round: int
