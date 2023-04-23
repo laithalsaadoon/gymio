@@ -47,8 +47,8 @@ class Trainer:
             this_round.color_off()
             this_round.color_on()
 
-            if self.job is not None:
-                self.job.remove()
+            # if self.job is not None:
+            #     self.job.remove()
 
             self.job = self.scheduler.add_job(self.start, "interval", seconds=this_round.seconds)
 
