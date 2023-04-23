@@ -26,11 +26,7 @@ class Trainer:
             if round == 1:
                 my_list.append(Timer_Dict(3, self.yellow, self.all_off, round))
 
-            seconds_in_round = Timer_Dict(
-                self.HIIT.train - 10,
-                self.green,
-                self.lights.all_off,
-                round)
+            seconds_in_round = Timer_Dict(self.HIIT.train - 10, self.green, self.lights.all_off, round)
             my_list.append(seconds_in_round)
 
             ten_seconds_to_rest = Timer_Dict(10, self.yellow, self.all_off, round)
@@ -54,9 +50,7 @@ class Trainer:
             if self.job is not None:
                 self.job.remove()
 
-            self.job = self.scheduler.add_job(
-                self.start, "interval", seconds=round.seconds
-            )
+            self.job = self.scheduler.add_job(self.start, "interval", seconds=round.seconds)
 
         except IndexError:
             print("You're done!")
@@ -67,7 +61,7 @@ class Trainer:
 
     def stop(self):
         self.all_off()
-        self.scheduler.shutdown()
+        self.scheduler.remove_all_jobs()
         print("Goodbye!")
 
     def pause(self):
