@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from collections.abc import Callable
 
+
 @dataclass
 class HIIT:
     rounds: int
@@ -27,6 +28,7 @@ class HIIT:
 @dataclass
 class Timer_Dict:
     seconds: int
+    is_blink: bool
     color_on: Callable[[None], None]
     color_off: Callable[[None], None]
     current_round: int

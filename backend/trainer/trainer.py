@@ -17,6 +17,7 @@ class Trainer:
         self.yellow = self.lights.yellow_on
         self.green = self.lights.green_on
         self.all_off = self.lights.all_off
+        self.yellow_blink = self.lights.yellow_blink
 
     def post_schedule(self, HIIT: HIIT):
         self.HIIT = HIIT
@@ -24,19 +25,20 @@ class Trainer:
         my_list: list[Timer_Dict] = []
         for round in range(1, self.HIIT.rounds + 1):
             if round == 1:
-                my_list.append(Timer_Dict(3, self.yellow, self.all_off, round))
+                my_list.append(Timer_Dict(3, False, self.yellow, self.all_off, round))
 
-            seconds_in_round = Timer_Dict(self.HIIT.train - 10, self.green, self.lights.all_off, round)
+            seconds_in_round = Timer_Dict(self.HIIT.train - 10, False, self.green, self.lights.all_off, round)
             my_list.append(seconds_in_round)
 
-            ten_seconds_to_rest = Timer_Dict(10, self.yellow, self.all_off, round)
+            ten_seconds_to_rest = Timer_Dict(10, True, self.yellow_blink, self.all_off, round)
             my_list.append(ten_seconds_to_rest)
 
             if round != self.HIIT.rounds:
-                seconds_in_rest = Timer_Dict(self.HIIT.rest - 5, self.red, self.all_off, round)
+                # If this is the last round, don't add the rest time
+                seconds_in_rest = Timer_Dict(self.HIIT.rest - 10, False, self.red, self.all_off, round)
                 my_list.append(seconds_in_rest)
 
-                five_second_warning = Timer_Dict(5, self.yellow, self.all_off, round)
+                five_second_warning = Timer_Dict(10, True, self.yellow_blink, self.all_off, round)
                 my_list.append(five_second_warning)
 
         self.rounds = deque(my_list)
@@ -46,7 +48,11 @@ class Trainer:
         try:
             this_round = self.rounds.popleft()
             this_round.color_off()
-            this_round.color_on()
+            if this_round.is_blink:
+                times_to_blink = this_round.seconds // 2
+                this_round.color_on(times_to_blink)
+            else:
+                this_round.color_on()
 
             if self.job is not None:
                 self.job.remove()

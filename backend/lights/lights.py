@@ -17,6 +17,9 @@ class Lights:
     def yellow_on(self):
         self.yellow.on()
 
+    def yellow_blink(self, num_times_to_blink: int = 5):
+        self.yellow.blink(n=num_times_to_blink, on_time=0.9, off_time=0.9)
+
     def red_on(self):
         self.red.on()
 
