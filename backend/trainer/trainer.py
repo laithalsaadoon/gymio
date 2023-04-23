@@ -62,6 +62,7 @@ class Trainer:
     def stop(self):
         self.all_off()
         self.scheduler.remove_all_jobs()
+        self.job = None
         print("Goodbye!")
 
     def pause(self):
