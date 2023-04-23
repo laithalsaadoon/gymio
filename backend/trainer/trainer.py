@@ -48,7 +48,7 @@ class Trainer:
             this_round.color_off()
             this_round.color_on()
             trigger = IntervalTrigger(seconds=this_round.seconds)
-            self.job = self.scheduler.add_job(self.start, trigger=trigger)
+            self.job = self.scheduler.add_job(self.start, trigger=trigger, max_instances=1, coalesce=True)
         except IndexError:
             print("You're done!")
             self.all_off()
