@@ -55,7 +55,7 @@ class Trainer:
         except IndexError:
             print("You're done!")
             self.all_off()
-            # self.job.remove()
+            self.job.remove()
             self.scheduled = False
             self.job = None
 

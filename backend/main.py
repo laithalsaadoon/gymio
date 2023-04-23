@@ -10,7 +10,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 app = Flask(__name__)
 # app = FastAPI()
 CORS(app)
-scheduler = BackgroundScheduler()
+scheduler = BackgroundScheduler().
 trainer = Trainer(scheduler)
 
 
