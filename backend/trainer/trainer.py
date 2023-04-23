@@ -43,19 +43,19 @@ class Trainer:
 
     def start(self):
         try:
-            round = self.rounds.popleft()
-            round.color_off()
-            round.color_on()
+            this_round = self.rounds.popleft()
+            this_round.color_off()
+            this_round.color_on()
 
             if self.job is not None:
                 self.job.remove()
 
-            self.job = self.scheduler.add_job(self.start, "interval", seconds=round.seconds)
+            self.job = self.scheduler.add_job(self.start, "interval", seconds=this_round.seconds)
 
         except IndexError:
             print("You're done!")
             self.all_off()
-            self.job.remove()
+            # self.job.remove()
             self.scheduled = False
             self.job = None
 
