@@ -3,6 +3,7 @@ import json
 from my_types.my_types import HIIT
 from trainer.trainer import Trainer
 from flask_cors import CORS
+
 # from fastapi import FastAPI
 
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -10,7 +11,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 app = Flask(__name__)
 # app = FastAPI()
 CORS(app)
-scheduler = BackgroundScheduler().
+scheduler = BackgroundScheduler()
 trainer = Trainer(scheduler)
 
 
@@ -41,7 +42,7 @@ def stop():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host="0.0.0.0", port=5000)
 
     # while True:
     # try:
