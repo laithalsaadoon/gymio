@@ -1,14 +1,12 @@
-import { AppLayout } from "@cloudscape-design/components";
-import { GIOContentLayout } from "./components";
+import { BrowserRouter } from "react-router-dom";
+import Main from "./main/main";
 
 function App() {
-  return (
-    <AppLayout
-      toolsHide={true}
-      navigationHide={true}
-      content={<GIOContentLayout />}
-    />
-  );
+	return (
+		<BrowserRouter>
+			<Main />
+		</BrowserRouter>
+	);
 }
 
 export default App;

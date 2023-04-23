@@ -8,5 +8,15 @@
 		"--ignore=E203,E211,E999,F401,F821,W503"
 	],
 	"python.linting.flake8Path": "/home/lalsaado/.local/bin/flake8",
-	"flake8.importStrategy": "fromEnvironment"
+	"flake8.importStrategy": "fromEnvironment",
+	"editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+	"editor.formatOnPaste": false, // required 
+	"editor.formatOnType": false, // required
+	"editor.formatOnSave": true, // optional 
+	"editor.formatOnSaveMode": "file", // required to format on save
+	"files.autoSave": "onFocusChange", // optional but recommended
+	"vs-code-prettier-eslint.prettierLast": "false",
+	"[python]": {
+		"editor.defaultFormatter": "ms-python.python"
+	} // set as "true" to run 'prettier' last not first
 }
