@@ -1,6 +1,7 @@
 from collections import deque
 
 from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.interval import IntervalTrigger
 
 from lights.lights import Lights
 from my_types.my_types import HIIT, Timer_Dict
@@ -46,17 +47,12 @@ class Trainer:
             this_round = self.rounds.popleft()
             this_round.color_off()
             this_round.color_on()
-
-            # if self.job is not None:
-            #     self.job.remove()
-
-            self.job = self.scheduler.add_job(self.start, "interval", seconds=this_round.seconds)
-
+            trigger = IntervalTrigger(seconds=this_round.seconds)
+            self.job = self.scheduler.add_job(self.start, trigger=trigger)
         except IndexError:
             print("You're done!")
             self.all_off()
-            self.job.remove()
-            self.scheduled = False
+            self.scheduler.remove_all_jobs()
             self.job = None
 
     def stop(self):
