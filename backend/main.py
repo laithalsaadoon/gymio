@@ -19,7 +19,6 @@ trainer = Trainer(scheduler)
 def start():
     workout = HIIT(**json.loads(request.data))
     trainer.post_schedule(workout)
-    trainer.start()
     return make_response(jsonify({"succeeded": True}), 200)
 
 

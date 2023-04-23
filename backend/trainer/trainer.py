@@ -10,7 +10,6 @@ from my_types.my_types import HIIT, Timer_Dict
 class Trainer:
     def __init__(self, scheduler: BackgroundScheduler):
         self.scheduler = scheduler
-        self.scheduled = False
         self.job = None
         self.scheduler.start()
         self.lights = Lights()
@@ -41,6 +40,7 @@ class Trainer:
                 my_list.append(five_second_warning)
 
         self.rounds = deque(my_list)
+        self.start()
 
     def start(self):
         try:

@@ -18,5 +18,7 @@
 	"vs-code-prettier-eslint.prettierLast": "false",
 	"[python]": {
 		"editor.defaultFormatter": "ms-python.python"
-	} // set as "true" to run 'prettier' last not first
+	},
+	"aws.codeWhisperer.importRecommendation": false,
+	"aws.codeWhisperer.includeSuggestionsWithCodeReferences": false // set as "true" to run 'prettier' last not first
 }
