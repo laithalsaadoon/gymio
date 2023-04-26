@@ -1,47 +1,79 @@
-from flask import Flask, request, jsonify, make_response
+# from flask import Flask, request, jsonify, make_response
 import json
+from backend.my_types.Workout import Workout
 from my_types.my_types import HIIT
 from trainer.trainer import Trainer
-from flask_cors import CORS
 
-# from fastapi import FastAPI
+# from flask_cors import CORS
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
+
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
-app = Flask(__name__)
-# app = FastAPI()
-CORS(app)
+# app = Flask(__name__)
+app = FastAPI()
+origins = ["*"]
+app.add_middleware(CORSMiddleware, allow_origins=origins)
+
+# CORS(app)
 scheduler = BackgroundScheduler()
 trainer = Trainer(scheduler)
 
 
-@app.route("/start", methods=["POST"])
-def start():
-    workout = HIIT(**json.loads(request.data))
+@app.post("/start")
+async def start(workout: Workout):
     trainer.post_schedule(workout)
-    return make_response(jsonify({"succeeded": True}), 200)
+    return {"succeeded": True}
 
 
-@app.route("/pause", methods=["GET"])
-def pause():
+@app.get("/pause")
+async def pause():
     trainer.pause()
-    return make_response(jsonify({"succeeded": True}), 200)
+    return {"succeeded": True}
 
 
-@app.route("/resume", methods=["GET"])
-def resume():
+@app.get("/resume")
+async def resume():
     trainer.resume()
-    return make_response(jsonify({"succeeded": True}), 200)
+    return {"succeeded": True}
 
 
-@app.route("/stop", methods=["GET"])
-def stop():
+@app.get("/stop")
+async def stop():
     trainer.stop()
-    return make_response(jsonify({"succeeded": True}), 200)
+    return {"succeeded": True}
+
+
+# @app.route("/start", methods=["POST"])
+# def start():
+#     workout = HIIT(**json.loads(request.data))
+#     trainer.post_schedule(workout)
+#     return make_response(jsonify({"succeeded": True}), 200)
+
+
+# @app.route("/pause", methods=["GET"])
+# def pause():
+#     trainer.pause()
+#     return make_response(jsonify({"succeeded": True}), 200)
+
+
+# @app.route("/resume", methods=["GET"])
+# def resume():
+#     trainer.resume()
+#     return make_response(jsonify({"succeeded": True}), 200)
+
+
+# @app.route("/stop", methods=["GET"])
+# def stop():
+#     trainer.stop()
+#     return make_response(jsonify({"succeeded": True}), 200)
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    uvicorn.run(host="0.0.0.0", port=5000)
 
     # while True:
     # try:
