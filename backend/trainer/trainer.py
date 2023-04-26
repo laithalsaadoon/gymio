@@ -89,6 +89,7 @@ class Trainer:
         self.start()
 
     def start(self):
+        # TODO: send_message to websocket for sounds and digital clock display on frontend
         try:
             this_round = self.rounds.popleft()
             this_round.color_off()
