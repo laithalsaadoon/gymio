@@ -5,8 +5,19 @@ from fastapi.middleware.cors import CORSMiddleware
 from apscheduler.schedulers.background import BackgroundScheduler
 
 app = FastAPI()
-origins = ["*"]
-app.add_middleware(CORSMiddleware, allow_origins=origins)
+origins = [
+    "http://localhost",
+    "http://192.168.248.65:5173",
+    "http://gymio.local",
+    "https://gymio.local",
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 scheduler = BackgroundScheduler()
 trainer = Trainer(scheduler)
