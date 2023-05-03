@@ -8,12 +8,16 @@ packages = [{include = "backend"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-Flask = "^2.2.3"
 APScheduler = "^3.10.1"
 gpiozero = "^1.6.2"
 rpi-gpio = "^0.7.1"
 fastapi = {extras = ["all"], version = "^0.95.1"}
-flask-cors = "^3.0.10"
+systemd-python = "^235"
+psycopg = "^3.1.8"
+bleak = "^0.20.2"
+sqlalchemy = "^2.0.12"
+websocket = "^0.2.1"
+asyncio = "^3.4.3"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
