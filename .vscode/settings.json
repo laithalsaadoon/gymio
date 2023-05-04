@@ -20,5 +20,6 @@
 		"editor.defaultFormatter": "ms-python.python"
 	},
 	"aws.codeWhisperer.importRecommendation": false,
-	"aws.codeWhisperer.includeSuggestionsWithCodeReferences": false // set as "true" to run 'prettier' last not first
+	"aws.codeWhisperer.includeSuggestionsWithCodeReferences": false,
+	"aws.codeWhisperer.shareCodeWhispererContentWithAWS": false // set as "true" to run 'prettier' last not first
 }
