@@ -8,8 +8,9 @@ app = FastAPI()
 origins = [
     "http://localhost",
     "http://192.168.248.65:5173",
-    "http://gymio.local",
-    "https://gymio.local",
+    "http://gymio.lan:5173",
+    "http://gymio.lan"
+    "https://gymio.lan",
 ]
 app.add_middleware(
     CORSMiddleware,
