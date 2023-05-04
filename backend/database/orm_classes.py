@@ -24,7 +24,7 @@ class User(Base):
     device = relationship("Device", back_populates="owner")
     birthday = Column(DATE)
     target_hr = Column(
-        Integer, Computed("220-date_part('year', age(timestamp birthday))::int")
+        Integer, Computed("220-date_part('year', age(date birthday))::int")
     )
 
 
