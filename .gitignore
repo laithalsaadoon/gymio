@@ -4,6 +4,9 @@
 ### Linux ###
 *~
 
+### direnv ###
+*.envrc
+
 ### vscode ###
 .vscode/*
 
