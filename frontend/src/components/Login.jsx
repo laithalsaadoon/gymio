@@ -4,12 +4,24 @@ import {
 	FormField,
 	SpaceBetween,
 	Header,
-	Input,
 	Button,
+	Select,
 } from "@cloudscape-design/components";
+import { useStoreState, useStoreActions } from "easy-peasy";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Login() {
+	const user = useStoreState((state) => state.user);
+	const setUser = useStoreActions((actions) => actions.setUser);
+	const navigate = useNavigate();
+
+	const handleLogin = (event) => {
+		event.preventDefault();
+
+		navigate("/");
+	};
+
 	return (
 		<React.Fragment>
 			<div
@@ -20,13 +32,10 @@ export function Login() {
 					transform: "translate(-50%, -50%)",
 				}}
 			>
-				<form onSubmit={(e) => e.preventDefault()}>
+				<form onSubmit={(e) => handleLogin(e)}>
 					<Form
 						actions={
 							<SpaceBetween direction="horizontal" size="xs">
-								<Button formAction="none" variant="link">
-									Cancel
-								</Button>
 								<Button variant="primary">Submit</Button>
 							</SpaceBetween>
 						}
@@ -34,22 +43,21 @@ export function Login() {
 					>
 						<Container
 							header={
-								<Header variant="h2">
-									Form container header
-								</Header>
+								<Header variant="h2">Who's working out?</Header>
 							}
 						>
-							<SpaceBetween direction="vertical" size="l">
-								<FormField label="First field">
-									<Input />
-								</FormField>
-								<FormField label="Second field">
-									<Input />
-								</FormField>
-								<FormField label="Third field">
-									<Input />
-								</FormField>
-							</SpaceBetween>
+							<FormField label="Name">
+								<Select
+									options={[
+										{ label: "Sylvia", value: "sylvia" },
+										{ label: "Laith", value: "laith" },
+									]}
+									selectedOption={user}
+									onChange={(e) =>
+										setUser(e.detail.selectedOption)
+									}
+								/>
+							</FormField>
 						</Container>
 					</Form>
 				</form>

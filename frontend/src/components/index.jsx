@@ -1,2 +1,2 @@
-export * from "./Header";
 export * from "../layout/ContentLayout";
+export * from "./TopNav";

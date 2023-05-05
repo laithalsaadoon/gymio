@@ -1,7 +1,17 @@
-import { createStore, action, thunk } from "easy-peasy";
+import { createStore, action, thunk, persist } from "easy-peasy";
 import TimerApiClient from "./apiClient/timerClient";
 
 export const store = createStore({
+	user: persist(
+		{
+			label: "",
+			value: "",
+		},
+		{ storage: "localStorage" }
+	),
+	setUser: action((state, payload) => {
+		state.user = payload;
+	}),
 	workout: {
 		rounds: 3,
 		train: 180,
