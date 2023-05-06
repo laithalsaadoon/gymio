@@ -13,13 +13,17 @@ function Main() {
 						<Route
 							index
 							element={
-								// <Login />
 								<AppLayout
 									toolsHide={true}
 									navigationHide={true}
 									content={<GIOContentLayout />}
 								/>
 							}
+						/>
+						<Route
+							path="/login"
+							element={
+								<Login />}
 						/>
 					</Routes>
 				</div>
