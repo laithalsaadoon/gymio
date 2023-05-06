@@ -1,5 +1,5 @@
 {
-	"python.formatting.provider": "black",
+	"python.formatting.provider": "none",
 	"python.linting.banditEnabled": false,
 	"python.linting.flake8Enabled": true,
 	"python.linting.enabled": true,
@@ -17,7 +17,7 @@
 	"files.autoSave": "onFocusChange", // optional but recommended
 	"vs-code-prettier-eslint.prettierLast": "false",
 	"[python]": {
-		"editor.defaultFormatter": "ms-python.python"
+		"editor.defaultFormatter": "ms-python.black-formatter"
 	},
 	"aws.codeWhisperer.importRecommendation": false,
 	"aws.codeWhisperer.includeSuggestionsWithCodeReferences": false,
