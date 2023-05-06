@@ -4,14 +4,20 @@ import Button from "@cloudscape-design/components/button";
 import SpaceBetween from "@cloudscape-design/components/space-between";
 import Modal from "@cloudscape-design/components/modal";
 import Box from "@cloudscape-design/components/box";
-import Badge from "@cloudscape-design/components/badge";
-import Icon from "@cloudscape-design/components/icon";
+
 import { ChooseWorkout } from "../components/ChooseWorkout";
 import Header from "@cloudscape-design/components/header";
 
 import { useStoreState, useStoreActions } from "easy-peasy";
 import { useState } from "react";
 import { ColumnLayout, Container } from "@cloudscape-design/components";
+
+const ValueWithLabel = ({ label, children }) => (
+	<div>
+		<Box variant="awsui-key-label">{label}</Box>
+		<div>{children}</div>
+	</div>
+);
 
 export function GIOContentLayout() {
 	const [workoutSetupModal, setWorkoutSetupModal] = useState(false);
@@ -21,7 +27,7 @@ export function GIOContentLayout() {
 	const stopWorkout = useStoreActions((actions) => actions.stopWorkout);
 
 	return (
-		<ContentLayout header={<Header />}>
+		<ContentLayout header={<Header>Home</Header>}>
 			<Container>
 				<ColumnLayout columns={2}>
 					<Container
@@ -35,33 +41,32 @@ export function GIOContentLayout() {
 							visible={workoutSetupModal}
 							onDismiss={() => setWorkoutSetupModal(false)}
 						/>
+						<SpaceBetween size="m" direction="vertical">
+							<Container>
+								<ColumnLayout columns={1} borders="horizontal">
+									<ValueWithLabel label="Rounds">
+										{rounds}
+									</ValueWithLabel>
 
-						<ColumnLayout columns={1}>
-							<Box>
-								<Button
-									onClick={() =>
-										setWorkoutSetupModal(!workoutSetupModal)
-									}
-								>
-									<SpaceBetween
-										size="xs"
-										direction="horizontal"
-									>
-										<Icon name="edit"></Icon>
-										<Badge color="red">
-											{rounds} rounds
-										</Badge>
-										<Badge color="blue">
-											{train} second rounds
-										</Badge>
-										<Badge color="green">
-											{rest} second rest
-										</Badge>
-									</SpaceBetween>
-								</Button>
-							</Box>
-							<Box>
+									<ValueWithLabel label="Train">
+										{train}
+									</ValueWithLabel>
+									<ValueWithLabel label="Rest">
+										{rest}
+									</ValueWithLabel>
+								</ColumnLayout>
+							</Container>
+							<Box float="right">
 								<SpaceBetween size="xs" direction="horizontal">
+									<Button
+										onClick={() =>
+											setWorkoutSetupModal(
+												!workoutSetupModal
+											)
+										}
+									>
+										Setup
+									</Button>
 									<Button
 										variant="primary"
 										iconName="status-positive"
@@ -78,7 +83,7 @@ export function GIOContentLayout() {
 									</Button>
 								</SpaceBetween>
 							</Box>
-						</ColumnLayout>
+						</SpaceBetween>
 					</Container>
 				</ColumnLayout>
 			</Container>
