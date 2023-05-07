@@ -5,15 +5,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from apscheduler.schedulers.background import BackgroundScheduler
 
 app = FastAPI(
-    ssl_certfile="/etc/ssl/certs/certificate.crt",
-    ssl_keyfile="/etc/ssl/private/private.key",
+    ssl_certfile="/etc/letsencrypt/live/gymio.me/fullchain.pem",
+    ssl_keyfile="/etc/letsencrypt/live/gymio.me/privkey.pem",
 )
 origins = [
     "http://localhost",
     "http://192.168.248.65:5173",
     "http://gymio.lan:5173",
-    "http://gymio.lan",
-    "https://gymio.lan",
+    "http://gymio.me",
+    "https://gymio.me",
 ]
 app.add_middleware(
     CORSMiddleware,
