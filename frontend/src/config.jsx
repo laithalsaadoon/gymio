@@ -1,1 +1,1 @@
-export const BASE_API_URL = "https://gymio.lan:5000";
+export const BASE_API_URL = "https://gymio.me:5000";
