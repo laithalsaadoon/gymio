@@ -5,8 +5,8 @@ from database.models import ButtonRestDuration
 import threading
 
 class Button:
-    def __init__(self):
-        self.lights = Lights()
+    def __init__(self, lights: Lights):
+        self.lights = lights
         self.db = SessionLocal()
         self.physical_button = GPIOButton(21)  # Assuming the button is connected to GPIO 21
         self.physical_button.when_pressed = self.handle_button_press
