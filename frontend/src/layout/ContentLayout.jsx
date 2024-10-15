@@ -31,7 +31,7 @@ export function GIOContentLayout() {
 	const handleSaveButtonRestDuration = async () => {
 		const timerClient = new TimerApiClient();
 		try {
-			const response = await timerClient.setButtonRestDuration(parseInt(buttonRestDuration));
+			const response = await timerClient.setButtonRestDuration({ duration: parseInt(buttonRestDuration) });
 			if (response.ok) {
 				console.log("Button rest duration saved successfully");
 				setShowButtonRestForm(false);
