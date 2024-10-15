@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 from database.database import engine
 from database.models import Base
 from pydantic import BaseModel, Field
+from button.button import Button
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
@@ -33,7 +34,7 @@ app.add_middleware(
 scheduler = BackgroundScheduler()
 trainer = Trainer(scheduler)
 session = SessionLocal()
-
+Button(lights=trainer.lights)
 def get_db():
     db = SessionLocal()
     try:
