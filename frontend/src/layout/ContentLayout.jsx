@@ -4,13 +4,13 @@ import Button from "@cloudscape-design/components/button";
 import SpaceBetween from "@cloudscape-design/components/space-between";
 import Modal from "@cloudscape-design/components/modal";
 import Box from "@cloudscape-design/components/box";
-
 import { ChooseWorkout } from "../components/ChooseWorkout";
 import Header from "@cloudscape-design/components/header";
-
 import { useStoreState, useStoreActions } from "easy-peasy";
 import { useState } from "react";
 import { ColumnLayout, Container } from "@cloudscape-design/components";
+import { Input, FormField } from "@cloudscape-design/components";
+import TimerApiClient from "../apiClient/timerClient";
 
 const ValueWithLabel = ({ label, children }) => (
 	<div>
@@ -25,6 +25,23 @@ export function GIOContentLayout() {
 	const workout = useStoreState((state) => state.workout);
 	const startWorkout = useStoreActions((actions) => actions.startWorkout);
 	const stopWorkout = useStoreActions((actions) => actions.stopWorkout);
+	const [buttonRestDuration, setButtonRestDuration] = useState("");
+	const [showButtonRestForm, setShowButtonRestForm] = useState(false);
+
+	const handleSaveButtonRestDuration = async () => {
+		const timerClient = new TimerApiClient();
+		try {
+			const response = await timerClient.setButtonRestDuration(parseInt(buttonRestDuration));
+			if (response.ok) {
+				console.log("Button rest duration saved successfully");
+				setShowButtonRestForm(false);
+			} else {
+				console.error("Failed to save button rest duration");
+			}
+		} catch (error) {
+			console.error("Error saving button rest duration:", error);
+		}
+	};
 
 	return (
 		<ContentLayout header={<Header>Home</Header>}>
@@ -83,6 +100,27 @@ export function GIOContentLayout() {
 									</Button>
 								</SpaceBetween>
 							</Box>
+						</SpaceBetween>
+					</Container>
+					<Container
+						header={<Header variant={"h2"}>Button Rest Duration</Header>}
+					>
+						<SpaceBetween size="m" direction="vertical">
+							<Button onClick={() => setShowButtonRestForm(!showButtonRestForm)}>
+								{showButtonRestForm ? "Hide Form" : "Set Button Rest Duration"}
+							</Button>
+							{showButtonRestForm && (
+								<FormField label="Button Rest Duration (seconds)">
+									<SpaceBetween size="s" direction="horizontal">
+										<Input
+											type="number"
+											value={buttonRestDuration}
+											onChange={(e) => setButtonRestDuration(e.detail.value)}
+										/>
+										<Button onClick={handleSaveButtonRestDuration}>Save</Button>
+									</SpaceBetween>
+								</FormField>
+							)}
 						</SpaceBetween>
 					</Container>
 				</ColumnLayout>

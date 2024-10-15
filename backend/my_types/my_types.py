@@ -26,7 +26,7 @@ class HIIT:
 
 
 @dataclass
-class Timer_Dict:
+class TimerDict:
     seconds: int
     is_blink: bool
     color_on: Callable[[None], None]

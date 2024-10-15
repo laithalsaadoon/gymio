@@ -61,7 +61,12 @@ export default class TimerApiClient {
 	async startWorkout(workout) {
 		return this.post("/start", workout);
 	}
+
 	async stopWorkout(workout) {
 		return this.get("/stop");
+	}
+
+	async setButtonRestDuration(duration) {
+		return this.post("/button_duration", { duration });
 	}
 }

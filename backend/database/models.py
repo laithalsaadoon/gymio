@@ -3,6 +3,11 @@ from sqlalchemy.dialects.postgresql import TIMESTAMP, DATE
 from sqlalchemy.orm import relationship
 from .database import Base
 
+class ButtonRestDuration(Base):
+    __tablename__ = "button_rest_duration"
+
+    id = Column(Integer, primary_key=True, index=True)
+    duration = Column(Integer)
 
 class Device(Base):
     __tablename__ = "devices"
@@ -23,9 +28,9 @@ class User(Base):
     name = Column(String, unique=True)
     device = relationship("Device", back_populates="owner")
     birthday = Column(DATE)
-    target_hr = Column(
-        Integer, Computed("220-date_part('year', age(date birthday))::int")
-    )
+    # target_hr = Column(
+    #     Integer, Computed("220-date_part('year', age(date birthday))::int")
+    # )
 
 
 class Exercise(Base):
@@ -55,7 +60,7 @@ class Session(Base):
     hr_points = Column(Integer, nullable=True)
     start = Column(TIMESTAMP(timezone=True))
     end = Column(TIMESTAMP(timezone=True))
-    duration = Column(Integer, Computed("extract(MINUTE from end-start)::int"))
+    # duration = Column(Integer, Computed("extract(MINUTE from end-start)::int"))
     nine_round_workout_id = Column(
         Integer, ForeignKey("nine_round_workouts.id"), nullable=True
     )

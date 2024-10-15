@@ -1,6 +1,7 @@
 import os
 
-if "wsl" not in os.uname().release.lower():
+not_wsl = "wsl" not in os.uname().release.lower()
+if not_wsl:
     from lights.lights import Lights
 
 from collections import deque
@@ -14,22 +15,22 @@ class Trainer:
         self.scheduler = scheduler
         self.job = None
         self.scheduler.start()
-        if "wsl" not in os.uname().release.lower():
+        self._setup_light_functions()
+
+    def _setup_light_functions(self):
+        if not_wsl:
             self.lights = Lights()
             self.red = self.lights.red_on
             self.yellow = self.lights.yellow_on
             self.green = self.lights.green_on
             self.all_off = self.lights.all_off
             self.yellow_blink = self.lights.yellow_blink
-        # shadow the light functions if we're on WSL for local testing without lights
         else:
-            self.red, self.yellow, self.green, self.all_off, self.yellow_blink = (
-                lambda: print("red"),
-                lambda: print("yellow"),
-                lambda: print("green"),
-                lambda: print("all off"),
-                lambda x: print("yellow blink"),
-            )
+            self.red = lambda: print("red")
+            self.yellow = lambda: print("yellow")
+            self.green = lambda: print("green")
+            self.all_off = lambda: print("all off")
+            self.yellow_blink = lambda x: print("yellow blink")
 
     def post_schedule(self, HIIT: Workout):
         self.HIIT = HIIT
