@@ -8,7 +8,7 @@ from database.database import SessionLocal
 from sqlalchemy.orm import Session
 from database.database import engine
 from database.models import Base
-
+from pydantic import BaseModel, Field
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
@@ -64,11 +64,14 @@ async def stop():
     trainer.stop()
     return {"succeeded": True}
 
+class ButtonRestDurationRequest(BaseModel):
+    duration: int = Field(..., ge=30, le=300)
+
 @app.post("/button_duration")
-async def button_duration(duration: int, db: Session = Depends(get_db)):
+async def button_duration(duration: ButtonRestDurationRequest, db: Session = Depends(get_db)):
     try:
         # Create a ButtonRestDuration instance with id=1 and the new duration
-        button_rest_duration = ButtonRestDuration(id=1, duration=duration)
+        button_rest_duration = ButtonRestDuration(id=1, duration=duration.duration)
         
         # Use merge to update if exists, or insert if not
         db.merge(button_rest_duration)
