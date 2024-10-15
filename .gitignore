@@ -4,6 +4,8 @@
 ### Linux ###
 *~
 
+sql_app.db
+
 ### direnv ###
 *.envrc
 
